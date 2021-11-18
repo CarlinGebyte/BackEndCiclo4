@@ -5,7 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
-
+/**
+ * @author CarlinGebyte
+ */
 @Entity
 @NoArgsConstructor
 @Data

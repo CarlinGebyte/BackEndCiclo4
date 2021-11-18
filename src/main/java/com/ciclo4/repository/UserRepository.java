@@ -7,15 +7,30 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author CarlinGebyte
+ */
 @Repository
 public class UserRepository {
+    /**
+     * Atributo Crud de la BD
+     */
     @Autowired
     private UserCrud userCrud;
 
+    /**
+     * Método para obtener todos los usuarios
+     * @return
+     */
     public List<User> getAll(){
         return (List<User>) userCrud.findAll();
     }
 
+    /**
+     * Método para crear usuarios
+     * @param user
+     * @return
+     */
     public User newUser(User user){
         return userCrud.save(user);
     }
