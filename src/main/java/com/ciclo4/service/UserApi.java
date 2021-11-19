@@ -32,7 +32,13 @@ public class UserApi {
      * @return
      */
     public User newUser(User user){
-        return userRepository.newUser(user);
+        List<User> users = userRepository.getAll();
+        if (users.size() == 0){
+            return userRepository.newUser(user);
+        }else if (verifyEmail(user.getEmail()) == false) {
+            return userRepository.newUser(user);
+        }
+        return user;
     }
 
     /**
