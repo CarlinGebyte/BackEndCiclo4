@@ -19,7 +19,7 @@ public class User {
     /**
      * Atributo ID
      */
-    @Id
+    @Id // sirve para definir el identificador único de cada Entidad
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
