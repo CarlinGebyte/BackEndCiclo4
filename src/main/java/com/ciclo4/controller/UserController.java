@@ -1,7 +1,7 @@
-package com.ciclo4.web;
+package com.ciclo4.controller;
 
 import com.ciclo4.model.User;
-import com.ciclo4.service.UserApi;
+import com.ciclo4.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,12 +10,13 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("/api/user/")
-public class UserWeb {
-    /**
-     * Atributo UserApi
-     */
-    @Autowired
-    private UserApi userApi;
+public class UserController {
+
+    private final UserServiceImpl userServiceImpl;
+
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
+    }
 
     /**
      * Método para obtener todos los usuarios
@@ -23,7 +24,7 @@ public class UserWeb {
      */
     @GetMapping("all")
     public List<User> getAll(){
-        return userApi.getAll();
+        return userServiceImpl.getAll();
     }
 
     /**
@@ -33,7 +34,7 @@ public class UserWeb {
      */
     @PostMapping("new")
     public User newUser(@RequestBody User user){
-        return userApi.newUser(user);
+        return userServiceImpl.newUser(user);
     }
 
     /**
@@ -43,7 +44,7 @@ public class UserWeb {
      */
     @GetMapping("{correoElectrónico}")
     public boolean byEmail(@PathVariable("correoElectrónico") String email){
-        return userApi.verifyEmail(email);
+        return userServiceImpl.verifyEmail(email);
     }
 
     /**
@@ -54,6 +55,6 @@ public class UserWeb {
      */
     @GetMapping("{email}/{pass}")
     public User byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass){
-        return userApi.byEmailPass(email, pass);
+        return userServiceImpl.byEmailPass(email, pass);
     }
 }

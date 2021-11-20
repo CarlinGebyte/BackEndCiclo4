@@ -11,19 +11,20 @@ import java.util.List;
  * @author CarlinGebyte
  */
 @Service
-public class UserApi {
-    /**
-     * Atributo userRepository
-     */
-    @Autowired
-    private UserRepository userRepository;
+public class UserServiceImpl {
+
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * Método para obtener todos los usuarios
      * @return
      */
     public List<User> getAll(){
-        return userRepository.getAll();
+        return userRepository.findAll();
     }
 
     /**
@@ -32,13 +33,7 @@ public class UserApi {
      * @return
      */
     public User newUser(User user){
-        List<User> users = userRepository.getAll();
-        if (users.size() == 0){
-            return userRepository.newUser(user);
-        }else if (verifyEmail(user.getEmail()) == false) {
-            return userRepository.newUser(user);
-        }
-        return user;
+        return userRepository.save(user);
     }
 
     /**
@@ -47,7 +42,7 @@ public class UserApi {
      * @return
      */
     public boolean verifyEmail(String email){
-        List<User> users = userRepository.getAll();
+        List<User> users = userRepository.findAll();
         boolean flag = false;
         for (User user : users){
             if (email.equals(user.getEmail())){
@@ -64,7 +59,7 @@ public class UserApi {
      * @return
      */
     public User byEmailPass(String email, String pass){
-        List<User> users = userRepository.getAll();
+        List<User> users = userRepository.findAll();
         User notExist = new User(null, email, pass, "NO DEFINIDO");
         for (User user : users){
             if (email.equals(user.getEmail()) && pass.equals(user.getPassword())){
