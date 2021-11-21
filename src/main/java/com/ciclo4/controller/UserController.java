@@ -1,6 +1,8 @@
 package com.ciclo4.controller;
 
 import com.ciclo4.model.User;
+import com.ciclo4.model.dto.UserDTO;
+import com.ciclo4.model.request.NewUserRequest;
 import com.ciclo4.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,18 +25,18 @@ public class UserController {
      * @return
      */
     @GetMapping("all")
-    public List<User> getAll(){
+    public List<UserDTO> getAll(){
         return userServiceImpl.getAll();
     }
 
     /**
      * Método para crear un usuario
-     * @param user
+     * @param request
      * @return
      */
     @PostMapping("new")
-    public User newUser(@RequestBody User user){
-        return userServiceImpl.newUser(user);
+    public UserDTO newUser(@RequestBody NewUserRequest request){
+        return userServiceImpl.newUser(request);
     }
 
     /**
