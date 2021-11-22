@@ -4,18 +4,26 @@ import com.ciclo4.model.User;
 import com.ciclo4.model.dto.UserDTO;
 import com.ciclo4.model.request.NewUserRequest;
 import com.ciclo4.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+/**
+ * @author CarlinGebyte
+ */
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("/api/user/")
 public class UserController {
-
+    /**
+     * Atributo Service
+     */
     private final UserServiceImpl userServiceImpl;
 
+    /**
+     * Método constructor
+     * @param userServiceImpl
+     */
     public UserController(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
     }
@@ -35,6 +43,7 @@ public class UserController {
      * @return
      */
     @PostMapping("new")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserDTO newUser(@RequestBody NewUserRequest request){
         return userServiceImpl.newUser(request);
     }
