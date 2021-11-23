@@ -2,7 +2,6 @@ package com.ciclo4.model;
 
 
 import lombok.*;
-
 import javax.persistence.*;
 
 /**
@@ -24,7 +23,7 @@ public class User {
     @Column(name = "id", nullable = false)
     private Integer id;
     /**
-     * Atributo Correo
+     * Atributo Email
      */
     @Column(name = "user_email",length = 50,unique = true, nullable = false)
     private String email;
@@ -34,7 +33,7 @@ public class User {
     @Column(name = "user_password", length = 50, nullable = false)
     private String password;
     /**
-     * Atributo UserName
+     * Atributo Name
      */
     @Column(name = "name", length = 80, nullable = false)
     private String name;

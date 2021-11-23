@@ -7,7 +7,16 @@ import lombok.Data;
 @Builder
 public class UserDTO {
 
+    /**
+     * Atributo ID
+     */
     private Integer id;
+    /**
+     * Atributo correo
+     */
     private String email;
+    /**
+     * Atributo nombre
+     */
     private String name;
 }
