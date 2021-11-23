@@ -16,6 +16,10 @@ public class UserDTO {
      */
     private String email;
     /**
+     * Atributo Password
+     */
+    private String password;
+    /**
      * Atributo nombre
      */
     private String name;

@@ -40,6 +40,7 @@ public class UserServiceImpl {
                         .id(user.getId())
                         .name(user.getName())
                         .email(user.getEmail())
+                        .password(user.getPassword())//Eliminar por seguridad
                         .build())
                 .collect(Collectors.toList());
     }
@@ -60,7 +61,7 @@ public class UserServiceImpl {
                 User.builder()
                         .email(user.getEmail())
                         .name(user.getName())
-                        .password(user.getPassword())
+                        .password(user.getPassword())// Eliminar por seguridad
                         .build()
         );
 
@@ -68,6 +69,7 @@ public class UserServiceImpl {
                 .name(savedUser.getName())
                 .id(savedUser.getId())
                 .email(savedUser.getEmail())
+                .password(savedUser.getPassword())
                 .build();
     }
 
