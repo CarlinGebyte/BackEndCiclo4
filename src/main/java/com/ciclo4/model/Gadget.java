@@ -13,19 +13,24 @@ import javax.persistence.Id;
 @Data // Getter y Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "clone")
-public class Clone {
+@Document(collection = "gadgets")
+public class Gadget {
     @Id
     private Integer id;
-    private String brand;
-    private String procesor;
-    private String os;
-    private String description;
-    private String memory;
-    private String hardDrive;
-    private boolean availability = true;
-    private double price;
-    private int quantity;
-    private String photography;
 
+    private String brand;
+
+    private String category;
+
+    private String name;
+
+    private String description;
+
+    private double price;
+
+    private boolean availability = true;
+
+    private int quantity;
+
+    private String photography;
 }

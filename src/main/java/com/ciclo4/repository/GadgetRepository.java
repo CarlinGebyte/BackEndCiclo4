@@ -1,9 +1,9 @@
 package com.ciclo4.repository;
 
-import com.ciclo4.model.Clone;
+import com.ciclo4.model.Gadget;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CloneRepository extends MongoRepository<Clone, Integer> {
+public interface GadgetRepository extends MongoRepository<Gadget, Integer> {
 }

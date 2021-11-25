@@ -1,4 +1,4 @@
 package com.ciclo4.controller;
 
-public class CloneController {
+public class GadgetController {
 }
