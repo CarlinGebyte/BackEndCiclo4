@@ -6,6 +6,7 @@ import com.ciclo4.model.request.NewUserRequest;
 import com.ciclo4.service.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class UserController {
 
     /**
      * Método constructor
+     *
      * @param userServiceImpl
      */
     public UserController(UserServiceImpl userServiceImpl) {
@@ -30,42 +32,66 @@ public class UserController {
 
     /**
      * Método para obtener todos los usuarios
+     *
      * @return
      */
     @GetMapping("all")
-    public List<UserDTO> getAll(){
+    public List<UserDTO> getAll() {
         return userServiceImpl.getAll();
     }
 
     /**
      * Método para crear un usuario
+     *
      * @param request
      * @return
      */
     @PostMapping("new")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO newUser(@RequestBody NewUserRequest request){
+    public UserDTO newUser(@RequestBody NewUserRequest request) {
         return userServiceImpl.newUser(request);
     }
 
     /**
      * Método para verificar si existe un usuario con el Email ingresado
+     *
      * @param email
      * @return
      */
     @GetMapping("{correoElectrónico}")
-    public boolean byEmail(@PathVariable("correoElectrónico") String email){
+    public boolean byEmail(@PathVariable("correoElectrónico") String email) {
         return userServiceImpl.verifyEmail(email);
     }
 
     /**
      * Método para verificar si existe un usuario, Email y Contraseña
+     *
      * @param email
      * @param pass
      * @return
      */
     @GetMapping("{email}/{pass}")
-    public User byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass){
+    public User byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass) {
         return userServiceImpl.byEmailPass(email, pass);
+    }
+
+    /**
+     * Método para actualizar un usuario
+     * @param request
+     * @return
+     */
+    @PutMapping("update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public  User update(@RequestBody NewUserRequest request){
+        return userServiceImpl.editUser(request);
+    }
+
+    /**
+     * Método para eliminar un usuario
+     * @param idUser
+     */
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") Integer idUser){
+        userServiceImpl.deleteUser(idUser);
     }
 }

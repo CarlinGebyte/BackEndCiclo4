@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BaseCustomException extends RuntimeException{
+public class BaseCustomException extends RuntimeException {
 
     /**
      * Atributo ErrrorCode
@@ -14,6 +14,7 @@ public class BaseCustomException extends RuntimeException{
 
     /**
      * Método constructor
+     *
      * @param message
      * @param errorCode
      */

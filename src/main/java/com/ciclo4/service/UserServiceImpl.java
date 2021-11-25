@@ -7,7 +7,9 @@ import com.ciclo4.model.request.NewUserRequest;
 import com.ciclo4.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -23,6 +25,7 @@ public class UserServiceImpl {
 
     /**
      * Constructor
+     *
      * @param userRepository
      */
     public UserServiceImpl(UserRepository userRepository) {
@@ -59,6 +62,7 @@ public class UserServiceImpl {
 
         User savedUser = userRepository.save(
                 User.builder()
+                        .id(user.getId())
                         .email(user.getEmail())
                         .name(user.getName())
                         .password(user.getPassword())// Eliminar por seguridad
@@ -69,7 +73,7 @@ public class UserServiceImpl {
                 .name(savedUser.getName())
                 .id(savedUser.getId())
                 .email(savedUser.getEmail())
-                .password(savedUser.getPassword())
+                .password(savedUser.getPassword())// Eliminar por seguridad
                 .build();
     }
 
@@ -106,5 +110,36 @@ public class UserServiceImpl {
             }
         }
         return notExist;
+    }
+
+    /**
+     * Método para actualizar un usuario
+     * @param user
+     * @return
+     */
+    public User editUser(NewUserRequest user){
+        if (user.getId() != null){
+            Optional<User> exist = userRepository.findById(user.getId());
+            if (exist.isPresent()) {
+                if (user.getName() != null){
+                    exist.get().setName(user.getName());
+                }
+                return userRepository.save(exist.get());
+            } else {
+                return new User();
+            }
+        } else {
+            return new User();
+        }
+    }
+
+    public void deleteUser(Integer idUser) {
+        Optional<User> user = userRepository.findById(idUser);
+        if (user.isPresent()) {
+            userRepository.deleteById(idUser);
+            //return idUser; // No sentido el método return Integer
+        } else {
+//            return idUser;
+        }
     }
 }
