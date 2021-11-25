@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * @author CarlinGebyte
@@ -14,13 +15,33 @@ import javax.persistence.Id;
 @Getter
 @Builder
 @Setter
-@Document(collection = "user")
+@Document(collection = "usuarios")
 public class User {
     /**
      * Atributo ID
      */
     @Id
     private Integer id;
+    /**
+     * Atributo identificación
+     */
+    private String identification;
+    /**
+     * Atributo birth Day
+     */
+    private Date birthtDay;
+    /**
+     * Atributo Month birth day
+     */
+    private String monthBirthtDay;
+    /**
+     * Atributo dirección
+     */
+    private String address;
+    /**
+     * Atributo teléfono
+     */
+    private String cellPhone;
     /**
      * Atributo Email
      */
@@ -33,6 +54,14 @@ public class User {
      * Atributo Name
      */
     private String name;
+    /**
+     * Atributo zone
+     */
+    private String zone;
+    /**
+     * Atributo type
+     */
+    private String type;
 }
 
 /**

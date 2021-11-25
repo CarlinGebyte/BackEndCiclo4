@@ -7,7 +7,6 @@ import com.ciclo4.model.request.NewUserRequest;
 import com.ciclo4.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,9 +40,14 @@ public class UserServiceImpl {
         return userRepository.findAll().stream()
                 .map(user -> UserDTO.builder()
                         .id(user.getId())
+                        .identification(user.getIdentification())
+                        .address(user.getAddress())
+                        .password(user.getPassword())
+                        .cellPhone(user.getCellPhone())
                         .name(user.getName())
                         .email(user.getEmail())
-                        .password(user.getPassword())//Eliminar por seguridad
+                        .type(user.getType())
+                        .zone(user.getZone())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -63,17 +67,24 @@ public class UserServiceImpl {
         User savedUser = userRepository.save(
                 User.builder()
                         .id(user.getId())
+                        .identification(user.getIdentification())
                         .email(user.getEmail())
                         .name(user.getName())
+                        .cellPhone(user.getCellPhone())
+                        .address(user.getAddress())
                         .password(user.getPassword())// Eliminar por seguridad
+                        .zone(user.getZone())
+                        .type(user.getType())
                         .build()
         );
 
         return UserDTO.builder()
                 .name(savedUser.getName())
-                .id(savedUser.getId())
+                .identification(savedUser.getIdentification())
                 .email(savedUser.getEmail())
+                .address(savedUser.getAddress())
                 .password(savedUser.getPassword())// Eliminar por seguridad
+                .zone(savedUser.getZone())
                 .build();
     }
 
@@ -103,7 +114,7 @@ public class UserServiceImpl {
      */
     public User byEmailPass(String email, String pass) {
         List<User> users = userRepository.findAll();
-        User notExist = new User(null, email, pass, "NO DEFINIDO");
+        User notExist = new User();
         for (User user : users) {
             if (email.equals(user.getEmail()) && pass.equals(user.getPassword())) {
                 return user;
@@ -124,6 +135,24 @@ public class UserServiceImpl {
                 if (user.getName() != null){
                     exist.get().setName(user.getName());
                 }
+                if (user.getIdentification() != null){
+                    exist.get().setIdentification(user.getIdentification());
+                }
+                if (user.getEmail() != null) {
+                    exist.get().setEmail(user.getEmail());
+                }
+                if (user.getAddress() != null) {
+                    exist.get().setAddress(user.getAddress());
+                }
+                if (user.getCellPhone() != null) {
+                    exist.get().setCellPhone(user.getCellPhone());
+                }
+                if (user.getPassword() != null) {
+                    exist.get().setPassword(user.getPassword());
+                }
+                if (user.getZone() != null) {
+                    exist.get().setZone(user.getZone());
+                }
                 return userRepository.save(exist.get());
             } else {
                 return new User();
@@ -137,7 +166,7 @@ public class UserServiceImpl {
         Optional<User> user = userRepository.findById(idUser);
         if (user.isPresent()) {
             userRepository.deleteById(idUser);
-            //return idUser; // No sentido el método return Integer
+            //return idUser; // No tiene sentido que el método retorne un Integer
         } else {
 //            return idUser;
         }

@@ -58,7 +58,7 @@ public class UserController {
      * @param email
      * @return
      */
-    @GetMapping("{correoElectrónico}")
+    @GetMapping("emailexist/{correoElectrónico}")
     public boolean byEmail(@PathVariable("correoElectrónico") String email) {
         return userServiceImpl.verifyEmail(email);
     }
