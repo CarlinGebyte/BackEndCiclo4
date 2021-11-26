@@ -3,11 +3,13 @@ package com.ciclo4.service;
 import com.ciclo4.model.Gadget;
 import com.ciclo4.repository.GadgetRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * @author CarlinGebyte
+ */
 @Service
 public class GadgetServiceImpl {
     /**

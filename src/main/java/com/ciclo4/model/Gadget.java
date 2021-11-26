@@ -3,7 +3,6 @@ package com.ciclo4.model;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import javax.persistence.Id;
 
 /**
