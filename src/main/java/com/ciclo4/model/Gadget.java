@@ -1,8 +1,7 @@
 package com.ciclo4.model;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -11,26 +10,44 @@ import javax.persistence.Id;
  * @author CarlinGebyte
  */
 @Data // Getter y Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 @Document(collection = "gadgets")
 public class Gadget {
+    /**
+     * Atributo Id
+     */
     @Id
     private Integer id;
-
+    /**
+     * Atributo Brand
+     */
     private String brand;
-
+    /**
+     * Atributo Category
+     */
     private String category;
-
+    /**
+     * Atributo Name
+     */
     private String name;
-
+    /**
+     * Atributo Description
+     */
     private String description;
-
-    private double price;
-
-    private boolean availability = true;
-
-    private int quantity;
-
+    /**
+     * Atributo Price
+     */
+    private Double price;
+    /**
+     * Atributo availability
+     */
+    private Boolean availability = true;
+    /**
+     * Atributo quantity
+     */
+    private Integer quantity;
+    /**
+     * Atributo photography
+     */
     private String photography;
 }

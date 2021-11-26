@@ -71,7 +71,7 @@ public class UserController {
      * @return
      */
     @GetMapping("{email}/{pass}")
-    public User byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass) {
+    public UserDTO byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass) {
         return userServiceImpl.byEmailPass(email, pass);
     }
 

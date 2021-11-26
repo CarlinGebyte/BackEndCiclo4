@@ -112,10 +112,10 @@ public class UserServiceImpl {
      * @param pass
      * @return
      */
-    public User byEmailPass(String email, String pass) {
-        List<User> users = userRepository.findAll();
-        User notExist = new User();
-        for (User user : users) {
+    public UserDTO byEmailPass(String email, String pass) {
+        List<UserDTO> users = getAll(); //userRepository.findAll();
+        UserDTO notExist =  UserDTO.builder().build();
+        for (UserDTO user : users) {
             if (email.equals(user.getEmail()) && pass.equals(user.getPassword())) {
                 return user;
             }
