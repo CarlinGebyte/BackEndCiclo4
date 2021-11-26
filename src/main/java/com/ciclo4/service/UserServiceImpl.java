@@ -70,6 +70,8 @@ public class UserServiceImpl {
                         .identification(user.getIdentification())
                         .email(user.getEmail())
                         .name(user.getName())
+                        .birthtDay(user.getBirthtDay())
+                        .monthBirthtDay(user.getMonthBirthtDay())
                         .cellPhone(user.getCellPhone())
                         .address(user.getAddress())
                         .password(user.getPassword())// Eliminar por seguridad
