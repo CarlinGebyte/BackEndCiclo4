@@ -81,12 +81,15 @@ public class UserServiceImpl {
         );
 
         return UserDTO.builder()
-                .name(savedUser.getName())
+                .id(savedUser.getId())
                 .identification(savedUser.getIdentification())
                 .email(savedUser.getEmail())
+                .name(savedUser.getName())
+                .cellPhone(savedUser.getCellPhone())
                 .address(savedUser.getAddress())
                 .password(savedUser.getPassword())// Eliminar por seguridad
                 .zone(savedUser.getZone())
+                .type(savedUser.getType())
                 .build();
     }
 
@@ -154,6 +157,12 @@ public class UserServiceImpl {
                 }
                 if (user.getZone() != null) {
                     exist.get().setZone(user.getZone());
+                }
+                if (user.getBirthtDay() != null){
+                    exist.get().setBirthtDay(user.getBirthtDay());
+                }
+                if (user.getMonthBirthtDay() != null) {
+                    exist.get().setMonthBirthtDay(user.getMonthBirthtDay());
                 }
                 return userRepository.save(exist.get());
             } else {
