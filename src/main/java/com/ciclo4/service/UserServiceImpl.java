@@ -158,6 +158,9 @@ public class UserServiceImpl {
                 if (user.getZone() != null) {
                     exist.get().setZone(user.getZone());
                 }
+                if (user.getType() != null) {
+                    exist.get().setType(user.getType());
+                }
                 if (user.getBirthtDay() != null){
                     exist.get().setBirthtDay(user.getBirthtDay());
                 }
