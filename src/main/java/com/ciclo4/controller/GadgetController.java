@@ -3,7 +3,11 @@ package com.ciclo4.controller;
 import com.ciclo4.model.Gadget;
 import com.ciclo4.service.GadgetServiceImpl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -20,6 +24,7 @@ public class GadgetController {
 
     /**
      * Constructor
+     *
      * @param gadgetService
      */
     public GadgetController(GadgetServiceImpl gadgetService) {
@@ -28,6 +33,7 @@ public class GadgetController {
 
     /**
      * Método para listar productos
+     *
      * @return
      */
     @GetMapping("all")
@@ -37,28 +43,35 @@ public class GadgetController {
 
     /**
      * Método para crear un producto
+     *
      * @param gadget
      * @return
      */
     @PostMapping("new")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Gadget newGadget(@RequestBody Gadget gadget) {
-        return gadgetService.newGadget(gadget);
+    public ResponseEntity<?> newGadget(@RequestBody @Valid Gadget gadget, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(gadget);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(gadgetService.newGadget(gadget));
     }
 
     /**
      * Método para actualizar un producto
+     *
      * @param gadget
      * @return
      */
     @PutMapping("update")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Gadget editGadget(@RequestBody Gadget gadget) {
-        return gadgetService.editGadget(gadget);
+    public ResponseEntity<?> editGadget(@RequestBody @Valid Gadget gadget, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(gadget);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(gadgetService.editGadget(gadget));
     }
 
     /**
      * Método para eliminar un producto
+     *
      * @param idGadget
      */
     @DeleteMapping("{id}")
