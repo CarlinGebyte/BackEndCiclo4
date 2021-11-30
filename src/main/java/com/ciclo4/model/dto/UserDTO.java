@@ -12,7 +12,31 @@ public class UserDTO {
      */
     private Integer id;
     /**
-     * Atributo correo
+     * Atributo identificación
+     */
+    private String identification;
+    /**
+     * Atributo birth Day
+     */
+    //private Date birthtDay;
+    /**
+     * Atributo Month birth day
+     */
+    //private String monthBirthtDay;
+    /**
+     * Atributo Name
+     */
+    private String name;
+    /**
+     * Atributo dirección
+     */
+    private String address;
+    /**
+     * Atributo teléfono
+     */
+    private String cellPhone;
+    /**
+     * Atributo Email
      */
     private String email;
     /**
@@ -20,7 +44,11 @@ public class UserDTO {
      */
     private String password;
     /**
-     * Atributo nombre
+     * Atributo zone
      */
-    private String name;
+    private String zone;
+    /**
+     * Atributo type
+     */
+    private String type;
 }

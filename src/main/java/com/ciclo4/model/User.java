@@ -2,39 +2,65 @@ package com.ciclo4.model;
 
 
 import lombok.*;
-import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * @author CarlinGebyte
  */
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Builder
 @Setter
-@Table(name = "user")
+@Document(collection = "usuarios")
 public class User {
     /**
      * Atributo ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Integer id;
+    /**
+     * Atributo identificación
+     */
+    private String identification;
+    /**
+     * Atributo birth Day
+     */
+    private Date birthtDay;
+    /**
+     * Atributo Month birth day
+     */
+    private String monthBirthtDay;
+    /**
+     * Atributo dirección
+     */
+    private String address;
+    /**
+     * Atributo teléfono
+     */
+    private String cellPhone;
     /**
      * Atributo Email
      */
-    @Column(name = "user_email",length = 50,unique = true, nullable = false)
     private String email;
     /**
      * Atributo Password
      */
-    @Column(name = "user_password", length = 50, nullable = false)
     private String password;
     /**
      * Atributo Name
      */
-    @Column(name = "name", length = 80, nullable = false)
     private String name;
+    /**
+     * Atributo zone
+     */
+    private String zone;
+    /**
+     * Atributo type
+     */
+    private String type;
 }
+

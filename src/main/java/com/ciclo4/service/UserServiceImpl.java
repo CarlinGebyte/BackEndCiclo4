@@ -8,6 +8,7 @@ import com.ciclo4.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -23,6 +24,7 @@ public class UserServiceImpl {
 
     /**
      * Constructor
+     *
      * @param userRepository
      */
     public UserServiceImpl(UserRepository userRepository) {
@@ -38,9 +40,14 @@ public class UserServiceImpl {
         return userRepository.findAll().stream()
                 .map(user -> UserDTO.builder()
                         .id(user.getId())
+                        .identification(user.getIdentification())
+                        .address(user.getAddress())
+                        .password(user.getPassword())
+                        .cellPhone(user.getCellPhone())
                         .name(user.getName())
                         .email(user.getEmail())
-                        .password(user.getPassword())//Eliminar por seguridad
+                        .type(user.getType())
+                        .zone(user.getZone())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -59,17 +66,30 @@ public class UserServiceImpl {
 
         User savedUser = userRepository.save(
                 User.builder()
+                        .id(user.getId())
+                        .identification(user.getIdentification())
                         .email(user.getEmail())
                         .name(user.getName())
+                        .birthtDay(user.getBirthtDay())
+                        .monthBirthtDay(user.getMonthBirthtDay())
+                        .cellPhone(user.getCellPhone())
+                        .address(user.getAddress())
                         .password(user.getPassword())// Eliminar por seguridad
+                        .zone(user.getZone())
+                        .type(user.getType())
                         .build()
         );
 
         return UserDTO.builder()
-                .name(savedUser.getName())
                 .id(savedUser.getId())
+                .identification(savedUser.getIdentification())
                 .email(savedUser.getEmail())
-                .password(savedUser.getPassword())
+                .name(savedUser.getName())
+                .cellPhone(savedUser.getCellPhone())
+                .address(savedUser.getAddress())
+                .password(savedUser.getPassword())// Eliminar por seguridad
+                .zone(savedUser.getZone())
+                .type(savedUser.getType())
                 .build();
     }
 
@@ -97,14 +117,72 @@ public class UserServiceImpl {
      * @param pass
      * @return
      */
-    public User byEmailPass(String email, String pass) {
-        List<User> users = userRepository.findAll();
-        User notExist = new User(null, email, pass, "NO DEFINIDO");
-        for (User user : users) {
+    public UserDTO byEmailPass(String email, String pass) {
+        List<UserDTO> users = getAll(); //userRepository.findAll();
+        UserDTO notExist =  UserDTO.builder().build();
+        for (UserDTO user : users) {
             if (email.equals(user.getEmail()) && pass.equals(user.getPassword())) {
                 return user;
             }
         }
         return notExist;
+    }
+
+    /**
+     * Método para actualizar un usuario
+     * @param user
+     * @return
+     */
+    public User editUser(NewUserRequest user){
+        if (user.getId() != null){
+            Optional<User> exist = userRepository.findById(user.getId());
+            if (exist.isPresent()) {
+                if (user.getName() != null){
+                    exist.get().setName(user.getName());
+                }
+                if (user.getIdentification() != null){
+                    exist.get().setIdentification(user.getIdentification());
+                }
+                if (user.getEmail() != null) {
+                    exist.get().setEmail(user.getEmail());
+                }
+                if (user.getAddress() != null) {
+                    exist.get().setAddress(user.getAddress());
+                }
+                if (user.getCellPhone() != null) {
+                    exist.get().setCellPhone(user.getCellPhone());
+                }
+                if (user.getPassword() != null) {
+                    exist.get().setPassword(user.getPassword());
+                }
+                if (user.getZone() != null) {
+                    exist.get().setZone(user.getZone());
+                }
+                if (user.getType() != null) {
+                    exist.get().setType(user.getType());
+                }
+                if (user.getBirthtDay() != null){
+                    exist.get().setBirthtDay(user.getBirthtDay());
+                }
+                if (user.getMonthBirthtDay() != null) {
+                    exist.get().setMonthBirthtDay(user.getMonthBirthtDay());
+                }
+                return userRepository.save(exist.get());
+            } else {
+                return new User();
+            }
+        } else {
+            return new User();
+        }
+    }
+
+    public void deleteUser(Integer idUser) {
+        Optional<User> user = userRepository.findById(idUser);
+        if (user.isPresent()) {
+            userRepository.deleteById(idUser);
+            //return idUser; // No tiene sentido que el método retorne un Integer
+        } else {
+//            return idUser;
+        }
     }
 }
