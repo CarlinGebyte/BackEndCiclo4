@@ -35,19 +35,7 @@ public class GadgetServiceImpl {
      * @return
      */
     public List<Gadget> getAll() {
-        return gadgetRepository.findAll().stream().
-                map(gadget -> Gadget.builder()
-                        .id(gadget.getId())
-                        .brand(gadget.getBrand())
-                        .category(gadget.getCategory())
-                        .name(gadget.getName())
-                        .description(gadget.getDescription())
-                        .price(gadget.getPrice())
-                        .availability(gadget.getAvailability())
-                        .quantity(gadget.getQuantity())
-                        .photography(gadget.getPhotography())
-                        .build())
-                .collect(Collectors.toList());
+        return gadgetRepository.findAll();
     }
 
     /**
