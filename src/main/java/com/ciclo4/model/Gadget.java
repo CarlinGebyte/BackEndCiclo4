@@ -47,19 +47,16 @@ public class Gadget {
      * Atributo Price
      */
     @NotNull
-    @NotBlank
     private Double price;
     /**
      * Atributo availability
      */
     @NotNull
-    @NotBlank
     private Boolean availability = true;
     /**
      * Atributo quantity
      */
     @NotNull
-    @NotBlank
     private Integer quantity;
     /**
      * Atributo photography
