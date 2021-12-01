@@ -75,6 +75,7 @@ public class GadgetController {
      * @param idGadget
      */
     @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGadget(@PathVariable("id") Integer idGadget) {
         gadgetService.deleteGadget(idGadget);
     }
