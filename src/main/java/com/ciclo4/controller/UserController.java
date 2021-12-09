@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author CarlinGebyte
@@ -38,6 +39,17 @@ public class UserController {
     @GetMapping("all")
     public List<UserDTO> getAll() {
         return userServiceImpl.getAll();
+    }
+
+    /**
+     * Método para obtener un usuerio por Id
+     *
+     * @param idUser
+     * @return
+     */
+    @GetMapping("{id}")
+    public Optional<User> getUser(@PathVariable("id") Integer idUser) {
+        return userServiceImpl.getUser(idUser);
     }
 
     /**
@@ -77,22 +89,24 @@ public class UserController {
 
     /**
      * Método para actualizar un usuario
+     *
      * @param request
      * @return
      */
     @PutMapping("update")
     @ResponseStatus(HttpStatus.CREATED)
-    public  User update(@RequestBody NewUserRequest request){
+    public User update(@RequestBody NewUserRequest request) {
         return userServiceImpl.editUser(request);
     }
 
     /**
      * Método para eliminar un usuario
+     *
      * @param idUser
      */
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Integer idUser){
+    public void delete(@PathVariable("id") Integer idUser) {
         userServiceImpl.deleteUser(idUser);
     }
 }

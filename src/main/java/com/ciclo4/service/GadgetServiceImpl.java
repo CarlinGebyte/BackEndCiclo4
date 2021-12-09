@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author CarlinGebyte
@@ -36,6 +35,16 @@ public class GadgetServiceImpl {
      */
     public List<Gadget> getAll() {
         return gadgetRepository.findAll();
+    }
+
+    /**
+     * Método para encontrar un producto por Id
+     *
+     * @param idGadget
+     * @return
+     */
+    public Optional<Gadget> getGadget(Integer idGadget) {
+        return gadgetRepository.findById(idGadget);
     }
 
     /**

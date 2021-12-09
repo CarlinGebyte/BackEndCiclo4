@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author CarlinGebyte
@@ -39,6 +40,17 @@ public class GadgetController {
     @GetMapping("all")
     public List<Gadget> getAll() {
         return gadgetService.getAll();
+    }
+
+    /**
+     * Método para encontrar un producto por Id
+     *
+     * @param idGadget
+     * @return
+     */
+    @GetMapping("{id}")
+    public Optional<Gadget> getGadget(@PathVariable("id") Integer idGadget) {
+        return gadgetService.getGadget(idGadget);
     }
 
     /**

@@ -27,6 +27,10 @@ public class User {
      */
     private String identification;
     /**
+     * Atributo Name
+     */
+    private String name;
+    /**
      * Atributo birth Day
      */
     private Date birthtDay;
@@ -50,10 +54,6 @@ public class User {
      * Atributo Password
      */
     private String password;
-    /**
-     * Atributo Name
-     */
-    private String name;
     /**
      * Atributo zone
      */

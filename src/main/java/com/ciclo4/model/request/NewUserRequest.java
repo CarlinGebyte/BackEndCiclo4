@@ -18,6 +18,10 @@ public class NewUserRequest {
      */
     private String identification;
     /**
+     * Atributo Name
+     */
+    private String name;
+    /**
      * Atributo birth Day
      */
     private Date birthtDay;
@@ -41,10 +45,6 @@ public class NewUserRequest {
      * Atributo Password
      */
     private String password;
-    /**
-     * Atributo Name
-     */
-    private String name;
     /**
      * Atributo zone
      */
