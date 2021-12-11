@@ -94,9 +94,12 @@ public class OrderService {
      */
     public Order editOrder(Order order) {
         Order exist = repository.findById(order.getId()).orElseThrow(() -> new BaseCustomException("Order no encontrado", HttpStatus.BAD_REQUEST.value()));
-
-        exist.setRegisterDay(order.getRegisterDay());
-        exist.setStatus(order.getStatus());
+        if (order.getRegisterDay() != null) {
+            exist.setRegisterDay(order.getRegisterDay());
+        }
+        if (order.getStatus() != null) {
+            exist.setStatus(order.getStatus());
+        }
         if (order.getSalesMan() != null) {
             exist.setSalesMan(order.getSalesMan());
         }
