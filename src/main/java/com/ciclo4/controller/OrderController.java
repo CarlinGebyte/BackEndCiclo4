@@ -1,5 +1,6 @@
 package com.ciclo4.controller;
 
+import com.ciclo4.model.Gadget;
 import com.ciclo4.model.Order;
 import com.ciclo4.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -36,7 +38,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("{id}")
-    public Order getOrder(@PathVariable("id") Integer idOrder) {
+    public Optional<Order> getOrder(@PathVariable("id") Integer idOrder) {
         return service.getOrder(idOrder);
     }
 
@@ -86,6 +88,11 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.CREATED).body(order);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.editOrder(order));
+    }
+
+    @PutMapping("add/{id}")
+    public Order addProduct(@PathVariable("id") Integer idOrder, @RequestBody Optional<Gadget> gadget) {
+        return service.addProduct(gadget, idOrder);
     }
 
     /**
