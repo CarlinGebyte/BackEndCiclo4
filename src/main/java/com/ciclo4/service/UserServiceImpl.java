@@ -7,6 +7,7 @@ import com.ciclo4.model.request.NewUserRequest;
 import com.ciclo4.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,11 +46,24 @@ public class UserServiceImpl {
                         .password(user.getPassword())
                         .cellPhone(user.getCellPhone())
                         .name(user.getName())
+                        .birthtDay(user.getBirthtDay())
+                        .monthBirthtDay(user.getMonthBirthtDay())
                         .email(user.getEmail())
                         .type(user.getType())
                         .zone(user.getZone())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Método para obtener un usuerio por Id
+     *
+     * @param idUser
+     * @return
+     */
+    public Optional<User> getUser(Integer idUser) {
+        Optional<User> exist = userRepository.findById(idUser);
+        return exist;
     }
 
     /**
@@ -63,7 +77,6 @@ public class UserServiceImpl {
                 .ifPresent(e -> {
                     throw new BaseCustomException("El correo ya existe", HttpStatus.BAD_REQUEST.value());
                 });
-
         User savedUser = userRepository.save(
                 User.builder()
                         .id(user.getId())
@@ -85,6 +98,8 @@ public class UserServiceImpl {
                 .identification(savedUser.getIdentification())
                 .email(savedUser.getEmail())
                 .name(savedUser.getName())
+                .birthtDay(savedUser.getBirthtDay())
+                .monthBirthtDay(savedUser.getMonthBirthtDay())
                 .cellPhone(savedUser.getCellPhone())
                 .address(savedUser.getAddress())
                 .password(savedUser.getPassword())// Eliminar por seguridad
@@ -119,7 +134,7 @@ public class UserServiceImpl {
      */
     public UserDTO byEmailPass(String email, String pass) {
         List<UserDTO> users = getAll(); //userRepository.findAll();
-        UserDTO notExist =  UserDTO.builder().build();
+        UserDTO notExist = UserDTO.builder().build();
         for (UserDTO user : users) {
             if (email.equals(user.getEmail()) && pass.equals(user.getPassword())) {
                 return user;
@@ -130,17 +145,18 @@ public class UserServiceImpl {
 
     /**
      * Método para actualizar un usuario
+     *
      * @param user
      * @return
      */
-    public User editUser(NewUserRequest user){
-        if (user.getId() != null){
+    public User editUser(NewUserRequest user) {
+        if (user.getId() != null) {
             Optional<User> exist = userRepository.findById(user.getId());
             if (exist.isPresent()) {
-                if (user.getName() != null){
+                if (user.getName() != null) {
                     exist.get().setName(user.getName());
                 }
-                if (user.getIdentification() != null){
+                if (user.getIdentification() != null) {
                     exist.get().setIdentification(user.getIdentification());
                 }
                 if (user.getEmail() != null) {
@@ -161,7 +177,7 @@ public class UserServiceImpl {
                 if (user.getType() != null) {
                     exist.get().setType(user.getType());
                 }
-                if (user.getBirthtDay() != null){
+                if (user.getBirthtDay() != null) {
                     exist.get().setBirthtDay(user.getBirthtDay());
                 }
                 if (user.getMonthBirthtDay() != null) {
@@ -180,9 +196,6 @@ public class UserServiceImpl {
         Optional<User> user = userRepository.findById(idUser);
         if (user.isPresent()) {
             userRepository.deleteById(idUser);
-            //return idUser; // No tiene sentido que el método retorne un Integer
-        } else {
-//            return idUser;
         }
     }
 }

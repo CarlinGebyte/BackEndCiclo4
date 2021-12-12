@@ -1,6 +1,7 @@
 package com.ciclo4;
 
 import com.ciclo4.repository.GadgetRepository;
+import com.ciclo4.repository.OrderRepository;
 import com.ciclo4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +14,8 @@ public class Ciclo4Application implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private GadgetRepository gadgetRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Ciclo4Application.class, args);
@@ -22,6 +25,7 @@ public class Ciclo4Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
         userRepository.deleteAll();
         gadgetRepository.deleteAll();
+        orderRepository.deleteAll();
     }
 
 }

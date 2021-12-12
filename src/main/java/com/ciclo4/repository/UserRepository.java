@@ -12,6 +12,7 @@ public interface UserRepository extends MongoRepository<User, Integer> {
 
     /**
      * Método para encontrar por email
+     *
      * @param email
      * @return
      */

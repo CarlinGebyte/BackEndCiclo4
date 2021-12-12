@@ -3,6 +3,8 @@ package com.ciclo4.model.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @Builder
 public class UserDTO {
@@ -16,17 +18,17 @@ public class UserDTO {
      */
     private String identification;
     /**
-     * Atributo birth Day
-     */
-    //private Date birthtDay;
-    /**
-     * Atributo Month birth day
-     */
-    //private String monthBirthtDay;
-    /**
      * Atributo Name
      */
     private String name;
+    /**
+     * Atributo birth Day
+     */
+    private Date birthtDay;
+    /**
+     * Atributo Month birth day
+     */
+    private String monthBirthtDay;
     /**
      * Atributo dirección
      */
