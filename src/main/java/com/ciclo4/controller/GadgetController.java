@@ -74,7 +74,7 @@ public class GadgetController {
      * @return
      */
     @PutMapping("update")
-    public ResponseEntity<?> editGadget(@RequestBody @Valid Gadget gadget, BindingResult bindingResult) {
+    public ResponseEntity<?> editGadget(@RequestBody Gadget gadget, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(gadget);
         }

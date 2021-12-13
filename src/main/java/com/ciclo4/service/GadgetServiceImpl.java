@@ -67,21 +67,30 @@ public class GadgetServiceImpl {
     public Gadget editGadget(Gadget gadget) {
         Gadget currentGadget = gadgetRepository.findById(gadget.getId()).orElseThrow(() -> new BaseCustomException("Gadget no encontrado", HttpStatus.BAD_REQUEST.value()));
 
-        currentGadget.setBrand(gadget.getBrand());
-
-        currentGadget.setCategory(gadget.getCategory());
-
-        currentGadget.setName(gadget.getName());
-
-        currentGadget.setDescription(gadget.getDescription());
-
-        currentGadget.setPrice(gadget.getPrice());
-
-        currentGadget.setAvailability(gadget.getAvailability());
-
-        currentGadget.setQuantity(gadget.getQuantity());
-
-        currentGadget.setPhotography(gadget.getPhotography());
+        if (gadget.getBrand() != null) {
+            currentGadget.setBrand(gadget.getBrand());
+        }
+        if (gadget.getCategory() != null) {
+            currentGadget.setCategory(gadget.getCategory());
+        }
+        if (gadget.getName() != null) {
+            currentGadget.setName(gadget.getName());
+        }
+        if (gadget.getDescription() != null) {
+            currentGadget.setDescription(gadget.getDescription());
+        }
+        if (gadget.getPrice() != null) {
+            currentGadget.setPrice(gadget.getPrice());
+        }
+        if (gadget.getAvailability() != null) {
+            currentGadget.setAvailability(gadget.getAvailability());
+        }
+        if (gadget.getQuantity() != null) {
+            currentGadget.setQuantity(gadget.getQuantity());
+        }
+        if (gadget.getPhotography() != null) {
+            currentGadget.setPhotography(gadget.getPhotography());
+        }
 
         return gadgetRepository.save(currentGadget);
 
