@@ -1,15 +1,15 @@
 package com.ciclo4.service;
 
 import com.ciclo4.exception.BaseCustomException;
-import com.ciclo4.model.Gadget;
 import com.ciclo4.model.Order;
 import com.ciclo4.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -37,11 +37,6 @@ public class OrderService {
      */
     public Optional<Order> getOrder(Integer idOrder) {
         return repository.findById(idOrder);
-//        if (exist.isPresent()) {
-//            return exist.get();
-//        } else {
-//            return Order.builder().build();
-//        }
     }
 
     /**
@@ -66,9 +61,10 @@ public class OrderService {
 
     /**
      * Metodo para top de usuarios
+     *
      * @return
      */
-    public Optional<Order> TopUserId(){
+    public Optional<Order> TopUserId() {
         return repository.findTopByOrderByIdDesc();
     }
 
@@ -113,27 +109,6 @@ public class OrderService {
     }
 
     /**
-     * Método para agregar un producto a la orden
-     *
-     * @param gadget
-     * @param idOrder
-     * @return
-     */
-    public Order addProduct(Optional<Gadget> gadget, Integer idOrder) {
-        if (gadget.isPresent()) {
-            Optional<Order> exist = repository.findById(idOrder);
-            Map<String, Gadget> products = exist.get().getProducts();
-            Integer var = products.size() + 1;
-            String key = var + "";
-            products.put(key, gadget.get());
-            exist.get().setProducts(products);
-            return repository.save(exist.get());
-        } else {
-            return Order.builder().build();
-        }
-    }
-
-    /**
      * Método para eliminar una orden
      *
      * @param idOrder
@@ -141,4 +116,43 @@ public class OrderService {
     public void deleteOrder(Integer idOrder) {
         repository.deleteById(idOrder);
     }
+
+    /**
+     * Método para obtener la lista de órdenes por ID de asesor
+     *
+     * @param id
+     * @return
+     */
+    public List<Order> getBySalesManId(Integer id) {
+        return repository.findBySalesManId(id);
+    }
+
+    /**
+     * Método para obtener las órdenes con un estado específico de un asesor por ID
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    public List<Order> getBySalesManIdAndStatus(Integer id, String status) {
+        return repository.findBySalesManIdAndStatus(id, status);
+    }
+
+    /**
+     * Método para Obtener las órdenes por fecha de un Asesor por ID
+     *
+     * @param registerDay
+     * @param id
+     * @return
+     */
+    public List<Order> getByRegisterDayAndSalesManId(String registerDay, Integer id) {
+        try {
+            return repository.findByRegisterDayAndSalesManId(new SimpleDateFormat("yyyy-MM-dd").parse(registerDay), id);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

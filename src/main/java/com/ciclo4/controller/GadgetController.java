@@ -91,4 +91,26 @@ public class GadgetController {
     public void deleteGadget(@PathVariable("id") Integer idGadget) {
         gadgetService.deleteGadget(idGadget);
     }
+
+    /**
+     * Listar gadgets por un String enviado, si se encuentra en su descripción
+     *
+     * @param description
+     * @return
+     */
+    @GetMapping("description/{desc}")
+    public List<Gadget> gadgetByDesc(@PathVariable("desc") String description) {
+        return gadgetService.gadgetByDesc(description);
+    }
+
+    /**
+     * Listar gadgets que tengan un precio menor o igual al ingresado
+     *
+     * @param price
+     * @return
+     */
+    @GetMapping("price/{price}")
+    public List<Gadget> gadgetByPrice(@PathVariable("price") Double price) {
+        return gadgetService.gadgetByPrice(price);
+    }
 }

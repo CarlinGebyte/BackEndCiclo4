@@ -99,4 +99,23 @@ public class GadgetServiceImpl {
         }
     }
 
+    /**
+     * Listar gadgets por un String enviado, si se encuentra en su descripción
+     *
+     * @param description
+     * @return
+     */
+    public List<Gadget> gadgetByDesc(String description) {
+        return gadgetRepository.findGadgetByDescriptionContains(description);
+    }
+
+    /**
+     * Listar gadgets que tengan un precio menor o igual al ingresado
+     *
+     * @param price
+     * @return
+     */
+    public List<Gadget> gadgetByPrice(Double price) {
+        return gadgetRepository.findGadgetByPriceIsLessThanEqual(price);
+    }
 }
