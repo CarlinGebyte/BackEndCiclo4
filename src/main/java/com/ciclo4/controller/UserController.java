@@ -116,8 +116,8 @@ public class UserController {
      * @param month
      * @return
      */
-//    @GetMapping("birthday/{month}")
-//    public List<User> userByMonth(@PathVariable("month") String month) {
-//        return userServiceImpl.userByMonth(month);
-//    }
+    @GetMapping("birthday/{month}")
+    public List<User> userByMonth(@PathVariable("month") String month) {
+        return userServiceImpl.userByMonth(month);
+    }
 }
