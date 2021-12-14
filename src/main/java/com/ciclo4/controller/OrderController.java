@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -142,7 +143,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("/date/{registerDay}/{id}")
-    public List<Order> getByRegisterDayAndSalesManId(@PathVariable("registerDay") String registerDay, @PathVariable("id") Integer id) {
+    public List<Order> getByRegisterDayAndSalesManId(@PathVariable("registerDay") Date registerDay, @PathVariable("id") Integer id) {
         return service.getByRegisterDayAndSalesManId(registerDay, id);
     }
 }
