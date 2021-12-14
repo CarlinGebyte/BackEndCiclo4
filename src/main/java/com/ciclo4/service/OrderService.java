@@ -144,12 +144,7 @@ public class OrderService {
      * @return
      */
     public List<Order> getByRegisterDayAndSalesManId(String registerDay, Integer id) {
-//        try {
-            return repository.findByRegisterDayContainsAndSalesManId(registerDay, id);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
+        return repository.findByRegisterDayContainsAndSalesManId(registerDay, id);
     }
 
 
