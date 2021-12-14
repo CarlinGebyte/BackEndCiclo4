@@ -98,10 +98,10 @@ public class GadgetController {
      * @param description
      * @return
      */
-    @GetMapping("description/{desc}")
-    public List<Gadget> gadgetByDesc(@PathVariable("desc") String description) {
-        return gadgetService.gadgetByDesc(description);
-    }
+//    @GetMapping("description/{desc}")
+//    public List<Gadget> gadgetByDesc(@PathVariable("desc") String description) {
+//        return gadgetService.gadgetByDesc(description);
+//    }
 
     /**
      * Listar gadgets que tengan un precio menor o igual al ingresado
@@ -109,8 +109,8 @@ public class GadgetController {
      * @param price
      * @return
      */
-    @GetMapping("price/{price}")
-    public List<Gadget> gadgetByPrice(@PathVariable("price") Double price) {
-        return gadgetService.gadgetByPrice(price);
-    }
+//    @GetMapping("price/{price}")
+//    public List<Gadget> gadgetByPrice(@PathVariable("price") Double price) {
+//        return gadgetService.gadgetByPrice(price);
+//    }
 }
