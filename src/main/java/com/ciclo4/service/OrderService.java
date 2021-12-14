@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -144,9 +143,9 @@ public class OrderService {
      * @param id
      * @return
      */
-    public List<Order> getByRegisterDayAndSalesManId(Date registerDay, Integer id) {
+    public List<Order> getByRegisterDayAndSalesManId(String registerDay, Integer id) {
 //        try {
-            return repository.findByRegisterDayAndSalesManId(registerDay, id);
+            return repository.findByRegisterDayContainsAndSalesManId(registerDay, id);
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //            return null;

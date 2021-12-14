@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -41,7 +40,8 @@ public class Order {
      * Atributo fecha de registro
      */
     @NotNull
-    private Date registerDay;
+    @NotBlank
+    private String registerDay;
 
     /**
      * Atributo estado
