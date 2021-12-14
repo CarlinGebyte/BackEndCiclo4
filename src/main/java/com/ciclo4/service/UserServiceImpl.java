@@ -192,10 +192,25 @@ public class UserServiceImpl {
         }
     }
 
+    /**
+     * Método para eliminar un usuario
+     *
+     * @param idUser
+     */
     public void deleteUser(Integer idUser) {
         Optional<User> user = userRepository.findById(idUser);
         if (user.isPresent()) {
             userRepository.deleteById(idUser);
         }
+    }
+
+    /**
+     * Método para listar usuarios cuyo mes de cumpleaños sea el ingresado
+     *
+     * @param month
+     * @return
+     */
+    public List<User> userByMonth(String month) {
+        return userRepository.findByMonthBirthtDay(month);
     }
 }

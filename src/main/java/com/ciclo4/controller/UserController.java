@@ -109,4 +109,15 @@ public class UserController {
     public void delete(@PathVariable("id") Integer idUser) {
         userServiceImpl.deleteUser(idUser);
     }
+
+    /**
+     * Método para listar usuarios cuyo mes de cumpleaños sea el ingresado
+     *
+     * @param month
+     * @return
+     */
+    @GetMapping("birthday/{month}")
+    public List<User> userByMonth(@PathVariable("month") String month) {
+        return userServiceImpl.userByMonth(month);
+    }
 }

@@ -1,6 +1,5 @@
 package com.ciclo4.controller;
 
-import com.ciclo4.model.Gadget;
 import com.ciclo4.model.Order;
 import com.ciclo4.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -25,6 +24,7 @@ public class OrderController {
 
     /**
      * Método para obtener todas las ordenes
+     *
      * @return
      */
     @GetMapping("all")
@@ -34,6 +34,7 @@ public class OrderController {
 
     /**
      * Método para obtener una orden por id
+     *
      * @param idOrder
      * @return
      */
@@ -44,6 +45,7 @@ public class OrderController {
 
     /**
      * Método para obtener las ordenes por zona del coordinador
+     *
      * @param zone
      * @return
      */
@@ -54,16 +56,18 @@ public class OrderController {
 
     /**
      * Método para obtener las ordenes por Identificación el asesor
+     *
      * @param identification
      * @return
      */
     @GetMapping("identificacion/{identification}")
-    public List<Order> getByIdentification(@PathVariable("identification") String identification){
+    public List<Order> getByIdentification(@PathVariable("identification") String identification) {
         return service.getByIdentification(identification);
     }
 
     /**
      * Método para crear una orden
+     *
      * @param order
      * @param bindingResult
      * @return
@@ -78,6 +82,7 @@ public class OrderController {
 
     /**
      * Método para actualizar una orden
+     *
      * @param order
      * @param bindingResult
      * @return
@@ -90,18 +95,54 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.editOrder(order));
     }
 
-    @PutMapping("add/{id}")
-    public Order addProduct(@PathVariable("id") Integer idOrder, @RequestBody Optional<Gadget> gadget) {
-        return service.addProduct(gadget, idOrder);
-    }
+//    @PutMapping("add/{id}")
+//    public Order addProduct(@PathVariable("id") Integer idOrder, @RequestBody Optional<Gadget> gadget) {
+//        return service.addProduct(gadget, idOrder);
+//    }
 
     /**
      * Método para eliminar una orden
+     *
      * @param idOrder
      */
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOrder(@PathVariable("id") Integer idOrder) {
         service.deleteOrder(idOrder);
+    }
+
+    /**
+     * Método para obtener la lista de órdenes por ID de asesor
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/salesman/{id}")
+    public List<Order> getBySalesManId(@PathVariable("id") Integer id) {
+        return service.getBySalesManId(id);
+    }
+
+    /**
+     * Método para obtener las órdenes con un estado específico de un asesor por ID
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @GetMapping("/state/{status}/{id}")
+    public List<Order> getByIdSalesManIdAndStatus(@PathVariable("id") Integer id, @PathVariable("status") String status) {
+        return service.getBySalesManIdAndStatus(id, status);
+    }
+
+    /**
+     * Método para Obtener las órdenes por fecha de un Asesor por ID
+     *
+     * @param registerDay
+     * @param id
+     * @return
+     */
+    @GetMapping("/date/{registerDay}/{id}")
+    public List<Order> getByRegisterDayAndSalesManId(@PathVariable("registerDay") String registerDay, @PathVariable("id") Integer id) {
+        return service.getByRegisterDayAndSalesManId(registerDay, id);
     }
 }
