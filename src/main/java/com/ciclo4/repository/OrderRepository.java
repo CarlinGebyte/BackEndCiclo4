@@ -4,7 +4,6 @@ import com.ciclo4.model.Order;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,7 +66,7 @@ public interface OrderRepository extends MongoRepository<Order, Integer> {
      * @param id
      * @return
      */
-    List<Order> findByRegisterDayAndSalesManId(Date registerDay, Integer id);
+    List<Order> findByRegisterDayContainsAndSalesManId(String registerDay, Integer id);
 
 
 }

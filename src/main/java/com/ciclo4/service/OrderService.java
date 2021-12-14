@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,12 +144,7 @@ public class OrderService {
      * @return
      */
     public List<Order> getByRegisterDayAndSalesManId(String registerDay, Integer id) {
-        try {
-            return repository.findByRegisterDayAndSalesManId(new SimpleDateFormat("yyyy-MM-dd").parse(registerDay), id);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return repository.findByRegisterDayContainsAndSalesManId(registerDay, id);
     }
 
 
