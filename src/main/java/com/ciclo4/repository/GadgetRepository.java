@@ -24,5 +24,6 @@ public interface GadgetRepository extends MongoRepository<Gadget, Integer> {
      * @param description
      * @return
      */
-    List<Gadget> findGadgetByDescriptionContains(String description);
+
+    List<Gadget> findGadgetByDescriptionRegex(String description);
 }

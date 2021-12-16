@@ -115,7 +115,7 @@ public class GadgetServiceImpl {
      * @return
      */
     public List<Gadget> gadgetByDesc(String description) {
-        return gadgetRepository.findGadgetByDescriptionContains(description);
+        return gadgetRepository.findGadgetByDescriptionRegex("(?i)" + description );
     }
 
     /**
